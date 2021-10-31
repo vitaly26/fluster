@@ -130,15 +130,8 @@ class Fluster<T extends Clusterable> {
       return null;
     }
 
-    var origin = index.points[originId];
-
-    var r = radius / (extent * math.pow(2, originZoom - 1));
-    List<int?> ids = index.within(origin.x ?? 0.0, origin.y ?? 0.0, r);
-
     var children = <T>[];
-    for (var id in ids) {
-      var c = index.points[id!];
-
+    for (var c in index.points) {
       if (c.parentId == clusterId) {
         children.add((c.pointsSize != null && c.pointsSize! > 0)
             ? _createCluster!(c, _xLng(c.x!), _yLat(c.y!))
